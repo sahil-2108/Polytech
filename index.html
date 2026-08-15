@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#0284c7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  
+  <title>PolyTech Hub | MSBTE Semester 1 Computer Engineering Notes</title>
+  <meta name="description" content="Liquid Display mobile academic notes portal for MSBTE Semester 1 Polytechnic Computer Engineering students. Direct in-browser PDF study notes and syllabus.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       Liquid Island Header Bar
+       ========================================================================= -->
+  <header class="site-header">
+    <div class="liquid-island-bar">
+      <a href="#" class="brand-logo" onclick="location.reload()">
+        <div class="liquid-logo-dot">💻</div>
+        <span>PolyTech</span>
+        <span class="brand-badge">Sem 1</span>
+      </a>
+
+      <div class="header-actions">
+        <button class="liquid-btn-icon" id="searchTriggerBtn" title="Search Notes (Ctrl+K)" aria-label="Search">
+          🔍
+        </button>
+
+        <button class="liquid-btn-icon" id="themeToggleBtn" aria-label="Toggle Theme" title="Toggle Light/Dark Theme">
+          🌙
+        </button>
+
+        <!-- Admin Access Button -->
+        <button class="btn-admin-pill" id="adminPillBtn" title="Admin Note Upload Portal">
+          🔒 Admin
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Main Liquid Container
+       ========================================================================= -->
+  <main class="container" style="flex-grow: 1;">
+
+    <!-- VIEW 1: Main Home & Explorer -->
+    <div id="homeView">
+      
+      <!-- Liquid Display Hero Card -->
+      <section class="hero-liquid">
+        <h1 class="hero-title">
+          Semester 1 <span>Computer Engineering</span>
+        </h1>
+        <p class="hero-sub">
+          Official MSBTE K-Scheme text notes, formula sheets, and unit summaries with in-browser PDF reading.
+        </p>
+        <div class="hero-pills-row">
+          <a href="https://econtent.msbte.edu.in/curriculum_search/" target="_blank" rel="noopener noreferrer" class="liquid-chip" style="color: var(--liquid-blue); font-weight: 700;">
+            <span>🌐</span> MSBTE Syllabus Search ↗
+          </a>
+          <span class="liquid-chip">CO / CM / CW / IF</span>
+          <span class="liquid-chip">Liquid Display</span>
+        </div>
+      </section>
+
+      <!-- Admin Toolbar (Active when logged in) -->
+      <div class="admin-banner" id="adminBanner">
+        <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem;">
+          <span>🔓</span>
+          <span>Admin Authenticated</span>
+        </div>
+        <div class="admin-actions-group">
+          <button class="btn-admin-action" id="openUploadModalBtn">➕ Upload PDF</button>
+          <button class="btn-admin-logout" id="adminLogoutBtn">Logout</button>
+        </div>
+      </div>
+
+      <!-- Subject Heading -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; padding: 0 0.2rem;">
+        <h2 style="font-size: 1.15rem; font-weight: 800; color: var(--liquid-text); letter-spacing: -0.02em;">
+          Semester 1 Subjects (6 Core)
+        </h2>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--liquid-blue);">MSBTE K-Scheme</span>
+      </div>
+
+      <!-- Subject Cards Grid (Liquid Squircle Cards) -->
+      <div class="subject-grid" id="subjectGrid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+    </div>
+
+    <!-- VIEW 2: Subject Detail View -->
+    <div id="subjectDetailView" class="detail-view">
+      <button class="btn-back-link" id="backToHomeBtn">
+        ← Back to All Subjects
+      </button>
+
+      <div class="detail-header-card">
+        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--liquid-text); margin-bottom: 0.4rem;" id="subDetailTitle">
+          Basic Mathematics (311302)
+        </h2>
+        <div style="font-size: 0.82rem; color: var(--liquid-text-sub); line-height: 1.5;" id="subDetailInfo">
+          <!-- Dynamic scheme & passing rule info -->
+        </div>
+      </div>
+
+      <!-- Tabs Strip -->
+      <div class="tabs-strip" id="subjectTabsNav">
+        <!-- Tabs populated dynamically -->
+      </div>
+
+      <!-- Tab Content Area -->
+      <div id="subjectTabContent">
+        <!-- Dynamic unit notes or syllabus populated by app.js -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       Footer (With Attribution: ~ Sahil Patil)
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>PolyTech Hub</strong> — MSBTE Polytechnic Computer Engineering Notes.
+        <div style="margin-top: 0.35rem; font-weight: 700; font-size: 0.9rem; color: var(--liquid-blue);">
+          ~ Sahil Patil
+        </div>
+      </div>
+      <div>
+        <a href="https://econtent.msbte.edu.in/curriculum_search/" target="_blank" rel="noopener noreferrer" style="color: var(--liquid-blue); font-weight: 600;">
+          MSBTE Curriculum Search ↗
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODAL 1: Admin Secure Login Modal
+       ========================================================================= -->
+  <div class="modal-layer" id="adminLoginModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>🔒 Secure Admin Login</span>
+        <button class="modal-close" id="closeAdminLoginModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--liquid-text-sub); margin-bottom: 0.85rem;">
+          Enter the secure admin password to upload, publish, or delete PDF notes.
+        </p>
+        <input type="password" class="input-minimal" id="adminPasswordInput" placeholder="Enter admin password..." autofocus autocomplete="off">
+        <div id="adminStatusMsg" style="font-size: 0.8rem; color: var(--liquid-rose); margin-bottom: 0.65rem; font-weight: 700;"></div>
+        <button class="btn-primary-action" id="adminLoginSubmitBtn" style="width: 100%;">
+          Authenticate
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: Admin Upload PDF Note Modal
+       ========================================================================= -->
+  <div class="modal-layer" id="uploadModal">
+    <div class="modal-box" style="max-width: 560px;">
+      <div class="modal-head">
+        <span>➕ Upload PDF Note (Admin)</span>
+        <button class="modal-close" id="closeUploadModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="uploadForm">
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">Select Subject</label>
+          <select class="input-minimal" id="uploadSubjectSelect">
+            <!-- Populated dynamically -->
+          </select>
+
+          <div style="display: grid; grid-template-columns: 90px 1fr; gap: 0.5rem;">
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">Unit #</label>
+              <input type="number" min="1" max="10" value="1" class="input-minimal" id="uploadUnitNum" required>
+            </div>
+            <div>
+              <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">Unit Title</label>
+              <input type="text" class="input-minimal" id="uploadUnitTitle" placeholder="e.g. Algebra & Matrices" required>
+            </div>
+          </div>
+
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">Theory Summary</label>
+          <textarea class="input-minimal" id="uploadSummary" style="min-height: 60px; resize: vertical;" placeholder="Brief summary of formulas and topics..." required></textarea>
+
+          <!-- Direct PDF File Selection -->
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">
+            Upload PDF from your phone/PC:
+          </label>
+          <input type="file" class="input-minimal" id="uploadPdfFileInput" accept="application/pdf" style="padding: 0.35rem;">
+
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">
+            Or local project path:
+          </label>
+          <input type="text" class="input-minimal" id="uploadPdfPathInput" placeholder="assets/docs/your-note.pdf">
+
+          <label style="font-size: 0.8rem; font-weight: 700; color: var(--liquid-text-sub); display: block; margin-bottom: 0.25rem;">Key Formulas (1 per line)</label>
+          <textarea class="input-minimal" id="uploadKeyPoints" style="min-height: 60px; resize: vertical;" placeholder="Formula 1&#10;Formula 2"></textarea>
+
+          <button type="submit" class="btn-primary-action" style="width: 100%;">
+            💾 Publish PDF Note
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: Instant Search
+       ========================================================================= -->
+  <div class="modal-layer" id="searchModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span>🔍 Search Notes</span>
+        <button class="modal-close" id="closeSearchModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="input-minimal" id="searchInput" placeholder="Search by topic, unit, or code...">
+        <div id="searchResults" style="max-height: 280px; overflow-y: auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: Direct In-Browser PDF Reader Viewer Modal
+       ========================================================================= -->
+  <div class="modal-layer" id="docModal">
+    <div class="modal-box modal-large">
+      <div class="modal-head">
+        <span id="docModalTitle">Unit PDF Viewer</span>
+        <button class="modal-close" id="closeDocModal">&times;</button>
+      </div>
+      <div class="modal-body" id="docModalBody">
+        <!-- Direct Embedded PDF Viewer populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
